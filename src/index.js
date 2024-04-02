@@ -1,6 +1,3 @@
-import './styles/style.css';
-import './styles/fireworks.css';
-
 window.addEventListener('DOMContentLoaded', () => {
     const speechRecognition = new (window.SpeechRecognition || window.webkitSpeechRecognition || window.mozSpeechRecognition || window.msSpeechRecognition)();
     const flames = document.querySelectorAll('.mo-fire'),

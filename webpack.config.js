@@ -1,6 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     entry: './src/index.js',
@@ -12,8 +12,7 @@ module.exports = {
 
     module: {
         rules: [
-            { test: /\.css$/, use: [MiniCssExtractPlugin.loader, 'css-loader'] },
-            { test: /\.js$/, use: 'babel-loader', exclude: /(node_modules|bower_components)/ }
+            { test: /\.js$/, use: 'babel-loader', exclude: /(node_modules|bower_components)/ },
         ]
     },
 
@@ -22,7 +21,18 @@ module.exports = {
             template: './src/index.html',
         }),
 
-        new MiniCssExtractPlugin()
+        new CopyWebpackPlugin({
+            patterns: [
+                {
+                    from: './src/styles',
+                    to: 'styles'
+                },
+                {
+                    from: './src/favicon.ico',
+                    to: 'favicon.ico'
+                }
+            ]
+        })
     ],
     
     devServer: {
