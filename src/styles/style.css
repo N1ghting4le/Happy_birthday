@@ -52,7 +52,7 @@ body {
   animation-delay: 1s;
 }
 
-.blow {
+.mo-fire.blow {
   transform: rotate(70deg) scale(-0.8, 1.5);
   animation: blow 0.3s linear 0.3s infinite;
 }
