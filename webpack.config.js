@@ -4,7 +4,8 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 
-const devMode = process.env.NODE_ENV !== "production";
+const mode = process.env.NODE_ENV || "production";
+const devMode = mode !== "production";
 
 module.exports = {
   entry: "./src/index.js",
@@ -12,6 +13,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "build"),
     filename: "bundle.js",
+    clean: true,
   },
 
   module: {
@@ -40,7 +42,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: "./src/index.html",
     }),
-    devMode ? [] : [new MiniCssExtractPlugin()],
+    ...(devMode ? [] : [new MiniCssExtractPlugin()]),
     new CopyWebpackPlugin({
       patterns: [
         {
@@ -49,14 +51,15 @@ module.exports = {
         },
       ],
     }),
-  ].flat(),
+  ],
 
   devServer: {
     static: {
       directory: path.join(__dirname, "build"),
     },
     open: true,
+    hot: true,
   },
 
-  mode: "production",
+  mode,
 };
