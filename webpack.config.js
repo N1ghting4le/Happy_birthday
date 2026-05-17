@@ -12,7 +12,7 @@ module.exports = {
 
   output: {
     path: path.resolve(__dirname, "build"),
-    filename: devMode ? "bundle.js" : "[name].[contenthash:8].js",
+    filename: devMode ? "[name].js" : "[name].[contenthash:8].js",
     clean: true,
   },
 

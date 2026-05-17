@@ -167,7 +167,7 @@ h1 {
     overflow: auto;
   }
 
-  h1 {
+  h1, h2 {
     text-align: center;
   }
 
