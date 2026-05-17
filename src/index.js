@@ -6,6 +6,7 @@ window.addEventListener("DOMContentLoaded", () => {
   const flames = document.querySelectorAll(".mo-fire");
   const firework = document.querySelector(".pyro");
   const h1 = document.querySelector("h1");
+  const span = document.querySelector("h2 span");
 
   let count = 0;
   let isFinalState = false;
@@ -20,6 +21,10 @@ window.addEventListener("DOMContentLoaded", () => {
         audio: true,
         video: false,
       });
+
+      span.removeEventListener("click", initAudio);
+      span.removeEventListener("touchstart", initAudio);
+      span.classList.remove("click-to-allow");
 
       const audioContext = new (
         window.AudioContext || window.webkitAudioContext
@@ -104,14 +109,7 @@ window.addEventListener("DOMContentLoaded", () => {
       alert("Для работы эффекта нужен доступ к микрофону!");
     }
   }
-  initAudio();
 
-  const startActivation = () => {
-    initAudio();
-    body.removeEventListener("click", startActivation);
-    body.removeEventListener("touchstart", startActivation);
-  };
-
-  body.addEventListener("click", startActivation);
-  body.addEventListener("touchstart", startActivation);
+  span.addEventListener("click", initAudio);
+  span.addEventListener("touchstart", initAudio);
 });

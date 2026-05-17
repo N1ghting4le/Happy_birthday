@@ -158,6 +158,11 @@ h1 {
   transition: color 0.5s ease-in-out;
 }
 
+.click-to-allow {
+  color: rgb(255, 113, 97);
+  cursor: pointer;
+}
+
 @media (max-width: 593px) {
   body {
     position: relative;
@@ -167,7 +172,8 @@ h1 {
     overflow: auto;
   }
 
-  h1, h2 {
+  h1,
+  h2 {
     text-align: center;
   }
 
