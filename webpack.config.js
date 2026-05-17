@@ -12,7 +12,7 @@ module.exports = {
 
   output: {
     path: path.resolve(__dirname, "build"),
-    filename: "bundle.js",
+    filename: devMode ? "bundle.js" : "[name].[contenthash:8].js",
     clean: true,
   },
 
@@ -36,13 +36,18 @@ module.exports = {
 
   optimization: {
     minimizer: [`...`, new CssMinimizerPlugin()],
+    splitChunks: {
+      chunks: "all",
+    },
   },
 
   plugins: [
     new HtmlWebpackPlugin({
       template: "./src/index.html",
     }),
-    ...(devMode ? [] : [new MiniCssExtractPlugin()]),
+    ...(devMode
+      ? []
+      : [new MiniCssExtractPlugin({ filename: "[name].[contenthash:8].css" })]),
     new CopyWebpackPlugin({
       patterns: [
         {
